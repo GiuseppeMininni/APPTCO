@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audi TCO Comparison</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Audi TCO Comparison</h1>
+    </header>
+    <main>
+        <form id="tco-form">
+            <div class="form-group">
+                <label for="model1">Modelo 1:</label>
+                <select id="model1" name="model1"></select>
+            </div>
+            <div class="form-group">
+                <label for="version1">Versión 1:</label>
+                <select id="version1" name="version1"></select>
+            </div>
+            <div class="form-group">
+                <label for="monthly-cost1">Cuota mensual (€/mes):</label>
+                <input type="number" id="monthly-cost1" name="monthly-cost1">
+            </div>
+            <div class="form-group">
+                <label for="model2">Modelo 2:</label>
+                <select id="model2" name="model2"></select>
+            </div>
+            <div class="form-group">
+                <label for="version2">Versión 2:</label>
+                <select id="version2" name="version2"></select>
+            </div>
+            <div class="form-group">
+                <label for="monthly-cost2">Cuota mensual (€/mes):</label>
+                <input type="number" id="monthly-cost2" name="monthly-cost2">
+            </div>
+            <div class="form-group">
+                <label for="weekly-km">Kilómetros por semana:</label>
+                <input type="number" id="weekly-km" name="weekly-km">
+            </div>
+            <div class="form-group">
+                <label for="weekly-charges">Cargas por semana:</label>
+                <input type="range" id="weekly-charges" name="weekly-charges" min="0" max="7">
+            </div>
+            <div class="form-group">
+                <label for="free-charges">Cargas gratis por semana:</label>
+                <input type="range" id="free-charges" name="free-charges" min="0" max="7">
+            </div>
+            <div class="form-group">
+                <label for="fuel-price">Precio combustible (€/l):</label>
+                <input type="number" id="fuel-price" name="fuel-price">
+            </div>
+            <div class="form-group">
+                <label for="electricity-price">Precio kWh (€/kWh):</label>
+                <input type="number" id="electricity-price" name="electricity-price">
+            </div>
+            <div class="form-group">
+                <button type="button" id="calculate-btn">Calcular</button>
+                <button type="reset">Reset</button>
+            </div>
+        </form>
+    </main>
+    <script src="js/scripts.js"></script>
+</body>
+</html>
