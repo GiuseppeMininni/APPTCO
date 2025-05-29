@@ -1,40 +1,49 @@
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Function to reset all input fields
-    function resetFields() {
-        document.getElementById('modelo1').value = '';
-        document.getElementById('version1').value = '';
-        document.getElementById('cuota1').value = '';
-        document.getElementById('modelo2').value = '';
-        document.getElementById('version2').value = '';
-        document.getElementById('cuota2').value = '';
-        document.getElementById('kmsemana').value = '';
-        document.getElementById('cargasemana').value = '0';
-        document.getElementById('cargagratissemana').value = '0';
-        document.getElementById('preciocomb').value = '';
-        document.getElementById('precioelec').value = '';
-    }
+    fetch('table1.json')
+        .then(response => response.json())
+        .then(data => {
+            const model1Select = document.getElementById('model1');
+            const version1Select = document.getElementById('version1');
+            const model2Select = document.getElementById('model2');
+            const version2Select = document.getElementById('version2');
 
-    // Function to calculate TCO
-    function calculateTCO() {
-        // Retrieve input values
-        const cuota1 = parseFloat(document.getElementById('cuota1').value) || 0;
-        const cuota2 = parseFloat(document.getElementById('cuota2').value) || 0;
-        const kmsemana = parseFloat(document.getElementById('kmsemana').value) || 0;
-        const cargasemana = parseFloat(document.getElementById('cargasemana').value) || 0;
-        const cargagratissemana = parseFloat(document.getElementById('cargagratissemana').value) || 0;
-        const preciocomb = parseFloat(document.getElementById('preciocomb').value) || 0;
-        const precioelec = parseFloat(document.getElementById('precioelec').value) || 0;
+            const models = [...new Set(data.cars.map(car => car.Modelo))];
 
-        // Calculate TCO for each model
-        const tco1 = cuota1 + (kmsemana * preciocomb) + (cargasemana * precioelec) - (cargagratissemana * precioelec);
-        const tco2 = cuota2 + (kmsemana * preciocomb) + (cargasemana * precioelec) - (cargagratissemana * precioelec);
+            models.forEach(model => {
+                const option1 = document.createElement('option');
+                option1.value = model;
+                option1.textContent = model;
+                model1Select.appendChild(option1);
 
-        // Display results
-        alert(`TCO Model 1: €${tco1.toFixed(2)}\nTCO Model 2: €${tco2.toFixed(2)}`);
-    }
+                const option2 = document.createElement('option');
+                option2.value = model;
+                option2.textContent = model;
+                model2Select.appendChild(option2);
+            });
 
-    // Add event listeners to buttons
-    document.getElementById('resetButton').addEventListener('click', resetFields);
-    document.getElementById('calculateButton').addEventListener('click', calculateTCO);
+            model1Select.addEventListener('change', function() {
+                const selectedModel = this.value;
+                const versions = data.cars.filter(car => car.Modelo === selectedModel).map(car => car.Version);
+                version1Select.innerHTML = '';
+                versions.forEach(version => {
+                    const option = document.createElement('option');
+                    option.value = version;
+                    option.textContent = version;
+                    version1Select.appendChild(option);
+                });
+            });
+
+            model2Select.addEventListener('change', function() {
+                const selectedModel = this.value;
+                const versions = data.cars.filter(car => car.Modelo === selectedModel).map(car => car.Version);
+                version2Select.innerHTML = '';
+                versions.forEach(version => {
+                    const option = document.createElement('option');
+                    option.value = version;
+                    option.textContent = version;
+                    version2Select.appendChild(option);
+                });
+            });
+        });
 });
